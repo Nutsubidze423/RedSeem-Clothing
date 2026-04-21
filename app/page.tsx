@@ -1,65 +1,334 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import AnimatedBlobs from "@/components/AnimatedBlobs";
+import ProductCard from "@/components/ProductCard";
+import { featuredProducts, mockProducts } from "@/lib/mockData";
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div style={{ backgroundColor: "#E4E2DD", overflowX: "hidden" }}>
+      {/* ── HERO ── */}
+      <section
+        className="relative min-h-screen flex flex-col justify-end"
+        style={{ paddingBottom: "8vh", paddingTop: "80px" }}
+      >
+        <AnimatedBlobs />
+
+        <div
+          className="relative z-10 w-full px-6 md:px-10"
+          style={{ maxWidth: 1440, margin: "0 auto" }}
+        >
+          {/* Eyebrow */}
+          <p
+            className="font-body text-xs tracking-[0.25em] uppercase mb-6"
+            style={{
+              color: "#1E1E1E",
+              opacity: 0,
+              animation: "slideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both",
+            }}
+          >
+            New Collection — SS 2025
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          {/* Headline */}
+          <div
+            style={{
+              opacity: 0,
+              animation: "slideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <h1
+              className="font-heading font-bold uppercase text-primary select-none"
+              style={{
+                fontSize: "clamp(56px, 18vw, 260px)",
+                lineHeight: 0.75,
+                letterSpacing: "-0.05em",
+                display: "block",
+              }}
+            >
+              WEAR
+            </h1>
+            <h1
+              className="font-heading font-bold uppercase text-primary select-none"
+              style={{
+                fontSize: "clamp(56px, 18vw, 260px)",
+                lineHeight: 0.75,
+                letterSpacing: "-0.05em",
+                display: "block",
+                marginLeft: "clamp(28px, 15vw, 220px)",
+                marginTop: "0.08em",
+              }}
+            >
+              THE RAW
+            </h1>
+          </div>
+
+          {/* Sub row */}
+          <div
+            className="flex flex-col sm:flex-row items-start sm:items-end gap-8 mt-10 md:mt-14"
+            style={{
+              opacity: 0,
+              animation: "slideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.45s both",
+            }}
           >
-            Documentation
-          </a>
+            <p
+              className="font-body text-sm leading-relaxed"
+              style={{ maxWidth: 380, color: "rgba(30,30,30,0.65)" }}
+            >
+              Clothing designed for those who reject the predictable. Intentional
+              construction. Unusual shapes. Always deliberate.
+            </p>
+
+            <div className="flex items-center gap-4 shrink-0">
+              <Link
+                href="/shop"
+                className="btn-raw px-7 py-4 font-body font-bold text-sm tracking-[0.1em] uppercase"
+                style={{ backgroundColor: "#1E1E1E", color: "#E4E2DD" }}
+              >
+                <span>Shop Now</span>
+              </Link>
+
+              <Link
+                href="/shop"
+                className="flex items-center gap-2 font-body text-sm font-medium hover:gap-3 transition-all duration-200"
+                style={{ color: "#DB4A2B" }}
+              >
+                <span>Explore</span>
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
+
+        {/* Scroll indicator */}
+        <div
+          className="absolute bottom-8 right-10 hidden md:flex flex-col items-center gap-2"
+          style={{
+            opacity: 0,
+            animation: "slideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.7s both",
+          }}
+        >
+          <div
+            className="w-px h-12"
+            style={{ background: "linear-gradient(to bottom, transparent, rgba(30,30,30,0.3))" }}
+          />
+        </div>
+      </section>
+
+      {/* ── FEATURED PRODUCTS ── */}
+      <section
+        className="w-full px-6 md:px-10 py-20 md:py-32"
+        style={{ maxWidth: 1440, margin: "0 auto" }}
+      >
+        <div className="flex items-end justify-between mb-12">
+          <h2
+            className="font-heading font-bold uppercase"
+            style={{
+              fontSize: "clamp(24px, 3vw, 48px)",
+              letterSpacing: "-0.04em",
+              lineHeight: 0.9,
+            }}
+          >
+            Featured
+          </h2>
+          <Link
+            href="/shop"
+            className="hidden sm:flex items-center gap-2 font-body text-sm transition-colors duration-200"
+            style={{ color: "#888888" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#DB4A2B")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#888888")}
+          >
+            View all <ArrowUpRight size={14} />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16">
+          {featuredProducts.map((product, i) => (
+            <ProductCard key={product.id} product={product} priority={i < 2} />
+          ))}
+        </div>
+      </section>
+
+      {/* ── CATEGORY DIVIDER — OUTERWEAR ── */}
+      <section className="relative overflow-hidden py-24 md:py-32">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 60% 50%, rgba(248,163,72,0.2), transparent)",
+          }}
+        />
+        <div
+          className="w-full px-6 md:px-10 relative z-10"
+          style={{ maxWidth: 1440, margin: "0 auto" }}
+        >
+          <p
+            className="font-heading font-bold uppercase text-right"
+            style={{
+              fontSize: "clamp(48px, 12vw, 180px)",
+              letterSpacing: "-0.05em",
+              lineHeight: 0.85,
+              color: "rgba(30,30,30,0.9)",
+            }}
+          >
+            OUTERWEAR
+          </p>
+          <div className="flex justify-end mt-8">
+            <Link
+              href="/shop?category=outerwear"
+              className="btn-ghost px-6 py-3 font-body text-sm tracking-[0.1em] uppercase font-medium"
+            >
+              <span>Explore Category</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CAMPAIGN BLOCK ── */}
+      <section style={{ backgroundColor: "#D9D6D0" }}>
+        <div
+          className="w-full px-6 md:px-10 py-20 md:py-28"
+          style={{ maxWidth: 1440, margin: "0 auto" }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="md:col-span-8">
+              <p
+                className="font-body text-xs tracking-[0.25em] uppercase mb-6"
+                style={{ color: "rgba(30,30,30,0.5)" }}
+              >
+                The Manifesto
+              </p>
+              <h2
+                className="font-heading font-bold uppercase"
+                style={{
+                  fontSize: "clamp(36px, 6vw, 100px)",
+                  letterSpacing: "-0.05em",
+                  lineHeight: 0.85,
+                  color: "#1E1E1E",
+                }}
+              >
+                NOTHING
+                <br />
+                IS
+                <br />
+                FINISHED
+              </h2>
+            </div>
+
+            <div className="md:col-span-4 flex flex-col gap-0">
+              {[
+                { label: "The Design Process", sub: "How we construct each piece" },
+                { label: "Sustainability", sub: "Deadstock and slow production" },
+                { label: "Sizing Philosophy", sub: "Shapes for every body" },
+              ].map(({ label, sub }) => (
+                <div
+                  key={label}
+                  className="group cursor-pointer py-5"
+                  style={{ borderTop: "1px solid rgba(30,30,30,0.15)" }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p
+                        className="font-body text-sm font-bold tracking-wider uppercase transition-colors duration-200"
+                        style={{ color: "#1E1E1E" }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color = "#DB4A2B")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color = "#1E1E1E")
+                        }
+                      >
+                        {label}
+                      </p>
+                      <p className="font-body text-xs mt-1" style={{ color: "#888888" }}>
+                        {sub}
+                      </p>
+                    </div>
+                    <ArrowUpRight
+                      size={16}
+                      className="shrink-0"
+                      style={{ color: "#888888" }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECOND CATEGORY DIVIDER — TOPS ── */}
+      <section className="relative overflow-hidden py-24 md:py-32">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 60% at 20% 50%, rgba(219,74,43,0.12), transparent)",
+          }}
+        />
+        <div
+          className="w-full px-6 md:px-10 relative z-10"
+          style={{ maxWidth: 1440, margin: "0 auto" }}
+        >
+          <p
+            className="font-heading font-bold uppercase"
+            style={{
+              fontSize: "clamp(48px, 12vw, 180px)",
+              letterSpacing: "-0.05em",
+              lineHeight: 0.85,
+              color: "rgba(30,30,30,0.9)",
+            }}
+          >
+            TOPS
+          </p>
+          <div className="flex justify-start mt-8">
+            <Link
+              href="/shop?category=tops"
+              className="btn-ghost px-6 py-3 font-body text-sm tracking-[0.1em] uppercase font-medium"
+            >
+              <span>Explore Category</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── MORE PRODUCTS ── */}
+      <section
+        className="w-full px-6 md:px-10 py-20 md:py-32"
+        style={{ maxWidth: 1440, margin: "0 auto" }}
+      >
+        <div className="flex items-end justify-between mb-12">
+          <h2
+            className="font-heading font-bold uppercase"
+            style={{
+              fontSize: "clamp(24px, 3vw, 48px)",
+              letterSpacing: "-0.04em",
+              lineHeight: 0.9,
+            }}
+          >
+            All Pieces
+          </h2>
+          <Link
+            href="/shop"
+            className="flex items-center gap-2 font-body text-sm transition-colors duration-200"
+            style={{ color: "#888888" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#DB4A2B")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#888888")}
+          >
+            View all <ArrowUpRight size={14} />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12 md:gap-y-20">
+          {mockProducts.slice(3, 12).map((product) => (
+            <ProductCard key={`all-${product.id}`} product={product} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
