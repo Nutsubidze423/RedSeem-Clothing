@@ -1,12 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Plus, Minus } from "lucide-react";
 import AnimatedBlobs from "@/components/AnimatedBlobs";
 import ProductCard from "@/components/ProductCard";
 import { featuredProducts, mockProducts } from "@/lib/mockData";
 
+const MANIFESTO_ITEMS = [
+  {
+    label: "The Design Process",
+    sub: "How we construct each piece",
+    body: "Each piece begins as a problem — a shape we haven't solved yet. We work through multiple toiles, cutting and reconstructing until the garment takes on a life of its own. No shortcuts. No CAD-first thinking. Hands in fabric, always.",
+  },
+  {
+    label: "Sustainability",
+    sub: "Deadstock and slow production",
+    body: "We source only deadstock fabric — material that would otherwise be destroyed. No new polyester. No virgin synthetics. Every run is limited by what we can find. Slow production is not a tagline. It's the only way we can work honestly.",
+  },
+  {
+    label: "Sizing Philosophy",
+    sub: "Shapes for every body",
+    body: "Bodies are not problems to be standardized. Our patterns start from unusual proportions and work outward. We offer five sizes in every piece and label them numerically, not prescriptively. S/M/L is a shorthand for something that was never true.",
+  },
+];
+
 export default function HomePage() {
+  const [openItem, setOpenItem] = useState<string | null>(null);
+
   return (
     <div style={{ backgroundColor: "#E4E2DD", overflowX: "hidden" }}>
       {/* ── HERO ── */}
@@ -219,42 +240,48 @@ export default function HomePage() {
             </div>
 
             <div className="md:col-span-4 flex flex-col gap-0">
-              {[
-                { label: "The Design Process", sub: "How we construct each piece" },
-                { label: "Sustainability", sub: "Deadstock and slow production" },
-                { label: "Sizing Philosophy", sub: "Shapes for every body" },
-              ].map(({ label, sub }) => (
-                <div
-                  key={label}
-                  className="group cursor-pointer py-5"
-                  style={{ borderTop: "1px solid rgba(30,30,30,0.15)" }}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
+              {MANIFESTO_ITEMS.map(({ label, sub, body }) => {
+                const isOpen = openItem === label;
+                return (
+                  <div
+                    key={label}
+                    className="cursor-pointer py-5"
+                    style={{ borderTop: "1px solid rgba(30,30,30,0.15)" }}
+                    onClick={() => setOpenItem(isOpen ? null : label)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p
+                          className="font-body text-sm font-bold tracking-wider uppercase transition-colors duration-200"
+                          style={{ color: isOpen ? "#DB4A2B" : "#1E1E1E" }}
+                        >
+                          {label}
+                        </p>
+                        <p className="font-body text-xs mt-1" style={{ color: "#888888" }}>
+                          {sub}
+                        </p>
+                      </div>
+                      <div className="shrink-0 transition-transform duration-300" style={{ color: "#888888" }}>
+                        {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        maxHeight: isOpen ? 200 : 0,
+                        overflow: "hidden",
+                        transition: "max-height 0.35s cubic-bezier(0.16,1,0.3,1)",
+                      }}
+                    >
                       <p
-                        className="font-body text-sm font-bold tracking-wider uppercase transition-colors duration-200"
-                        style={{ color: "#1E1E1E" }}
-                        onMouseEnter={(e) =>
-                          (e.currentTarget.style.color = "#DB4A2B")
-                        }
-                        onMouseLeave={(e) =>
-                          (e.currentTarget.style.color = "#1E1E1E")
-                        }
+                        className="font-body text-xs leading-relaxed mt-4"
+                        style={{ color: "rgba(30,30,30,0.65)" }}
                       >
-                        {label}
-                      </p>
-                      <p className="font-body text-xs mt-1" style={{ color: "#888888" }}>
-                        {sub}
+                        {body}
                       </p>
                     </div>
-                    <ArrowUpRight
-                      size={16}
-                      className="shrink-0"
-                      style={{ color: "#888888" }}
-                    />
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

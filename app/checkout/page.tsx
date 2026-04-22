@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChevronLeft, Check } from "lucide-react";
 import { useCartStore } from "@/lib/store";
+import { useAuthStore } from "@/lib/authStore";
 
 const DELIVERY_FEE = 5;
 
@@ -33,9 +35,17 @@ function validate(data: FormData): FormErrors {
 }
 
 export default function CheckoutPage() {
+  const router = useRouter();
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const { items, subtotal, clearCart } = useCartStore();
   const sub = subtotal();
   const total = sub + DELIVERY_FEE;
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.replace("/login?redirect=/checkout");
+    }
+  }, [isLoggedIn, router]);
 
   const [form, setForm] = useState<FormData>({
     name: "",

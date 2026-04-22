@@ -3,6 +3,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import CartPanel from "@/components/CartPanel";
 import Footer from "@/components/Footer";
+import ToastContainer from "@/components/Toast";
 
 export const metadata: Metadata = {
   title: "REDSEEM — Raw Fashion",
@@ -31,6 +32,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <CartPanel />
+        <ToastContainer />
       </body>
     </html>
   );

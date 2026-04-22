@@ -2,8 +2,22 @@
 
 import Link from "next/link";
 import { Globe, Hash, Share2 } from "lucide-react";
+import { useToastStore } from "@/lib/toastStore";
+
+const SHOP_LINKS: { label: string; href: string }[] = [
+  { label: "New Arrivals", href: "/shop" },
+  { label: "Outerwear", href: "/shop?category=outerwear" },
+  { label: "Tops", href: "/shop?category=tops" },
+  { label: "Bottoms", href: "/shop?category=bottoms" },
+  { label: "Sets", href: "/shop?category=sets" },
+];
+
+const INFO_LINKS = ["About", "Sustainability", "Sizing Guide", "Lookbook", "Press"];
+const HELP_LINKS = ["Contact", "Returns", "Shipping", "FAQ", "Track Order"];
 
 export default function Footer() {
+  const show = useToastStore((s) => s.show);
+
   return (
     <footer style={{ backgroundColor: "#1E1E1E", color: "#E4E2DD" }} className="relative overflow-hidden">
       {/* Big year background text */}
@@ -21,7 +35,6 @@ export default function Footer() {
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 pt-16 pb-10 relative z-10">
-        {/* Top grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
@@ -36,9 +49,9 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               {[Globe, Hash, Share2].map((Icon, i) => (
-                <a
+                <button
                   key={i}
-                  href="#"
+                  onClick={() => show("Coming soon")}
                   className="transition-colors duration-200"
                   style={{ color: "rgba(228,226,221,0.4)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#DB4A2B")}
@@ -46,7 +59,7 @@ export default function Footer() {
                   aria-label="Social link"
                 >
                   <Icon size={18} strokeWidth={1.5} />
-                </a>
+                </button>
               ))}
             </div>
           </div>
@@ -57,10 +70,10 @@ export default function Footer() {
               Shop
             </p>
             <ul className="space-y-3">
-              {["New Arrivals", "Outerwear", "Tops", "Bottoms", "Sets"].map((label) => (
+              {SHOP_LINKS.map(({ label, href }) => (
                 <li key={label}>
                   <Link
-                    href="/shop"
+                    href={href}
                     className="font-body text-sm transition-colors duration-200"
                     style={{ color: "rgba(228,226,221,0.65)" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "#E4E2DD")}
@@ -79,17 +92,17 @@ export default function Footer() {
               Info
             </p>
             <ul className="space-y-3">
-              {["About", "Sustainability", "Sizing Guide", "Lookbook", "Press"].map((label) => (
+              {INFO_LINKS.map((label) => (
                 <li key={label}>
-                  <Link
-                    href="#"
-                    className="font-body text-sm transition-colors duration-200"
+                  <button
+                    onClick={() => show("Coming soon")}
+                    className="font-body text-sm transition-colors duration-200 text-left"
                     style={{ color: "rgba(228,226,221,0.65)" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "#E4E2DD")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(228,226,221,0.65)")}
                   >
                     {label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -101,17 +114,17 @@ export default function Footer() {
               Help
             </p>
             <ul className="space-y-3">
-              {["Contact", "Returns", "Shipping", "FAQ", "Track Order"].map((label) => (
+              {HELP_LINKS.map((label) => (
                 <li key={label}>
-                  <Link
-                    href="#"
-                    className="font-body text-sm transition-colors duration-200"
+                  <button
+                    onClick={() => show("Coming soon")}
+                    className="font-body text-sm transition-colors duration-200 text-left"
                     style={{ color: "rgba(228,226,221,0.65)" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "#E4E2DD")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(228,226,221,0.65)")}
                   >
                     {label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
